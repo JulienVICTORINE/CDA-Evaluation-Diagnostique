@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    /* background: gray; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* centre bien au centre l'application */
+    gap: 10px; /* créer des espaces */
+}
+
+button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    &:hover{
+        background: black;
+        color: white;
+    }
+}
+
+input {
+    padding: 10px 20px;
+}
+
+li {
+    list-style: none;  /* enlève les points sur courses et vaisselle */
+    margin: 10px;
+}
+
