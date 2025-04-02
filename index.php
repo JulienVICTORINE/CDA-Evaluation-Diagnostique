@@ -8,6 +8,14 @@
         $conn->query($sql);
     }
 
+    if (isset($_POST['update'])) {
+        $name = $_POST['update'];  // valeur de l'input
+        $id = $_POST['id'];
+        $sql = "UPDATE task SET name='$name' WHERE id=$id";
+        $conn->query($sql);
+    }
+
+
     // Afficher toutes les tâches
     $sql = "SELECT * FROM task";
     $tasks = $conn->query($sql);
@@ -33,8 +41,35 @@
             <button>+</button>
         </form>
         <ul>
-            <li>Courses <button>x</button></li>
-            <li>Vaisselles <button>x</button></li>    
+            <?php
+                if ($tasks->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $tasks->fetch_assoc()) {
+                        ?>
+                        <li id="<?php echo $row["id"] ?>">
+                            <?php echo $row["name"] ?> <button class="edit" id="edit<?php echo $row["id"] ?>">
+                                <img height="10px" src="edit.svg" />
+                            </button><a href="delete.php?id=<?php echo $row["id"] ?>"><button>x</button></a>
+                        </li>
+                        <script>
+                            let li <?php $row["id"] ?> = document.getElementById(<?php $row["id"] ?>);
+                            let editbutton <?php $row["id"] ?> = document.getElementById("edit <?php $row["id"] ?>");
+                            editbutton <?php $row["id"] ?>.addEventListener("click", ()=>{
+                                form1.style.display = "none";
+                                li<?=$row["id"] ?>.innerHTML = `<form method="post">
+                                <input type="hidden" name="id" value="<?=$row["id"]?>"/>
+                                <input type="text" name="update" value="<?=$row["name"]?>"  />
+                                <button>Update</button>
+                                </form> `;
+                            });
+                            </script>
+                            
+                    <?php
+                        }
+                }
+                ?>
+            <!-- <li>Courses <button>x</button></li>
+            <li>Vaisselles <button>x</button></li>     -->
         </ul>
     </div>
 </body>

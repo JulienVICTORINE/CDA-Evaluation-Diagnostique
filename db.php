@@ -2,7 +2,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "cda_task_manager";
+    $dbname = "cda_task_manager2";
 
     // Créer la connexion à la base de données
     $conn = new mysqli($servername, $username, $password, $dbname);
