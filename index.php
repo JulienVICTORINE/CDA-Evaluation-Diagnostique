@@ -1,3 +1,21 @@
+<?php
+    include("db.php");
+
+    // vérifie l'existance de la donnée pour ajouter une tache
+    if (isset($_POST['name'])) {
+        $name = $_POST['name']; // valeur de l'input avec name="name"
+        $sql = "INSERT INTO task (name) VALUES ('$name')";
+        $conn->query($sql);
+    }
+
+    // Afficher toutes les tâches
+    $sql = "SELECT * FROM task";
+    $tasks = $conn->query($sql);
+
+    $conn->close();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +28,7 @@
 <body>
     <div class="main-container">
         <h1>Task Manager</h1>
-        <form action="">
+        <form method="post" id="form1">
             <input type="text" placeholder="Nom de la tâche">
             <button>+</button>
         </form>
